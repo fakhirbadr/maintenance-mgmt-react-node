@@ -61,9 +61,9 @@ const data = {
       icon: AppWindow,
       isActive: true,
       items: [
-        { title: "interface1", url: "#" },
-        { title: "interface2", url: "#" },
-        { title: "interface3", url: "#" },
+        { title: "Tableau de board", url: "#" },
+        { title: "Rapports", url: "#" },
+        { title: "Predictive", url: "#" },
       ],
     },
     {
@@ -121,30 +121,42 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
+  const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     setMounted(true);
+    // Optionnel: définir le menu actif par défaut si nécessaire
+    const defaultActive = data.navMain.find((item) => item.isActive);
+    if (defaultActive) {
+      setActiveMenu(defaultActive.title);
+    }
   }, []);
 
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+  const handleMenuToggle = (title: string) => {
+    setActiveMenu((prev) => (prev === title ? null : title));
+  };
+
   if (!mounted) {
-    return null; // ou un placeholder/squelette de chargement
+    return null;
   }
 
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        {/* <TeamSwitcher teams={data.teams} /> */}
         <h1 className="to-Yellow-500 flex items-center justify-center bg-gradient-to-r from-orange-600 bg-clip-text text-3xl font-extrabold text-transparent">
           - ABAI -
         </h1>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        {/* <NavProjects projects={data.projects} /> */}
+        <NavMain
+          items={data.navMain}
+          activeMenu={activeMenu}
+          onMenuToggle={handleMenuToggle}
+        />
       </SidebarContent>
       <SidebarFooter className="flex flex-col gap-2">
         <Button

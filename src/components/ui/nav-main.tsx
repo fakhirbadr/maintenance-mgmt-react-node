@@ -1,7 +1,4 @@
-"use client";
-
 import { ChevronRight, type LucideIcon } from "lucide-react";
-
 import {
   Collapsible,
   CollapsibleContent,
@@ -18,9 +15,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 
-export function NavMain({
-  items,
-}: {
+interface NavMainProps {
   items: {
     title: string;
     url: string;
@@ -31,7 +26,11 @@ export function NavMain({
       url: string;
     }[];
   }[];
-}) {
+  activeMenu: string | null;
+  onMenuToggle: (title: string) => void;
+}
+
+export function NavMain({ items, activeMenu, onMenuToggle }: NavMainProps) {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
@@ -40,7 +39,14 @@ export function NavMain({
           <Collapsible
             key={item.title}
             asChild
-            defaultOpen={item.isActive}
+            open={activeMenu === item.title}
+            onOpenChange={(open) => {
+              if (open) {
+                onMenuToggle(item.title);
+              } else if (activeMenu === item.title) {
+                onMenuToggle("");
+              }
+            }}
             className="group/collapsible"
           >
             <SidebarMenuItem>
@@ -51,7 +57,7 @@ export function NavMain({
                   <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
-              <CollapsibleContent>
+              <CollapsibleContent className="data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down overflow-hidden">
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => (
                     <SidebarMenuSubItem key={subItem.title}>
