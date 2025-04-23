@@ -121,29 +121,29 @@ const Index = () => {
       <h2 className="text-2xl font-bold dark:text-white">Alertes en retard</h2>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+        <Card className="overflow-hidden rounded-lg border-0 p-1 shadow-md transition-all duration-300 hover:shadow-lg">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 px-5 pt-5 pb-2">
+            <CardTitle className="font-serif text-sm font-medium">
               Total en retard
             </CardTitle>
-            <ExclamationTriangleIcon className="h-5 w-5 text-red-600" />
+            <ExclamationTriangleIcon className="h-5 w-5 text-blue-600" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-500">
+          <CardContent className="px-5 pb-5">
+            <div className="text-2xl font-bold text-slate-700">
               {alertesEnRetard.length}
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+        <Card className="overflow-hidden rounded-lg border-0 p-1 shadow-md transition-all duration-300 hover:shadow-lg">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 px-5 pt-5 pb-2">
+            <CardTitle className="font-serif text-sm font-medium">
               Plus gros retard
             </CardTitle>
-            <ClockIcon className="h-5 w-5 text-orange-600" />
+            <ClockIcon className="h-5 w-5 text-teal-600" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-500">
+          <CardContent className="px-5 pb-5">
+            <div className="text-2xl font-bold text-slate-700">
               {alertesEnRetard.length > 0
                 ? formatRetard(calculateRetard(alertesEnRetard[0].datePrevue))
                 : "0h"}
@@ -151,15 +151,15 @@ const Index = () => {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
+        <Card className="overflow-hidden rounded-lg border-0 p-1 shadow-md transition-all duration-300 hover:shadow-lg">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 px-5 pt-5 pb-2">
+            <CardTitle className="font-serif text-sm font-medium">
               Moyenne de retard
             </CardTitle>
-            <InfoCircledIcon className="h-5 w-5 text-blue-600" />
+            <InfoCircledIcon className="h-5 w-5 text-indigo-600" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-500">
+          <CardContent className="px-5 pb-5">
+            <div className="text-2xl font-bold text-slate-700">
               {alertesEnRetard.length > 0
                 ? formatRetard(
                     alertesEnRetard.reduce(
@@ -200,18 +200,22 @@ const Index = () => {
                 {alertesEnRetard.map((alerte) => {
                   const retard = calculateRetard(alerte.datePrevue);
                   return (
-                    <TableRow key={alerte.id} className="hover:bg-red-50">
+                    <TableRow key={alerte.id} className="hover:bg-slate-50">
                       <TableCell className="font-medium">
                         {alerte.titre}
                       </TableCell>
                       <TableCell>{alerte.site}</TableCell>
                       <TableCell>{formatDate(alerte.datePrevue)}</TableCell>
-                      <TableCell className="font-bold text-red-600">
+                      <TableCell className="font-bold text-slate-700">
                         {formatRetard(retard)}
                       </TableCell>
                       <TableCell>{getPriorityBadge(alerte.priorite)}</TableCell>
                       <TableCell>
-                        <Button variant="" size="sm">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="border-blue-200 text-blue-700 hover:bg-blue-50"
+                        >
                           Détails
                         </Button>
                       </TableCell>

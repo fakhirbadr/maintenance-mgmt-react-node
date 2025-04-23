@@ -82,7 +82,13 @@ const EtatEquipment = () => {
             </defs>
 
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-            <Pie data={equipmentData} dataKey="count" nameKey="status" label>
+            <Pie
+              data={equipmentData}
+              dataKey="count"
+              nameKey="status"
+              label
+              innerRadius={60}
+            >
               {equipmentData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={entry.fill} />
               ))}
