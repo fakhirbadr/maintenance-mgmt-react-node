@@ -6,7 +6,6 @@ import {
   BookOpen,
   Timer,
   Command,
-  Frame,
   GalleryVerticalEnd,
   Map,
   PieChart,
@@ -17,9 +16,7 @@ import {
   Moon,
 } from "lucide-react";
 import { NavMain } from "./ui/nav-main";
-import { NavProjects } from "./ui/nav-projects";
 import { NavUser } from "./ui/nav-user";
-import { TeamSwitcher } from "./ui/team-switcher";
 import {
   Sidebar,
   SidebarContent,
@@ -29,8 +26,8 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
+import { useMenu } from "../context/MenuContext";
 
-// Données de configuration
 const data = {
   user: {
     name: "shadcn",
@@ -38,28 +35,15 @@ const data = {
     avatar: "/avatars/shadcn.jpg",
   },
   teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
+    { name: "Acme Inc", logo: GalleryVerticalEnd, plan: "Enterprise" },
+    { name: "Acme Corp.", logo: AudioWaveform, plan: "Startup" },
+    { name: "Evil Corp.", logo: Command, plan: "Free" },
   ],
   navMain: [
     {
       title: "Vue d'ensemble",
       url: "#",
       icon: AppWindow,
-      isActive: true,
       items: [
         { title: "Tableau de board", url: "#" },
         { title: "Rapports", url: "#" },
@@ -75,6 +59,7 @@ const data = {
         { title: "Création", url: "/preventive/creation" },
         { title: "Planning", url: "/preventive/planning" },
         { title: "Alerte", url: "/preventive/alerte" },
+        { title: "historique", url: "/preventive/historique" },
       ],
     },
     {
@@ -82,10 +67,10 @@ const data = {
       url: "#",
       icon: Wrench,
       items: [
-        { title: "Tableau de board", url: "/preventive/dashboard" },
-        { title: "Création", url: "/preventive/creation" },
-        { title: "Planning", url: "/preventive/planning" },
-        { title: "Alerte", url: "/preventive/alerte" },
+        { title: "Tableau de board", url: "/corrective/dashboard" },
+        { title: "Création", url: "/corrective/creation" },
+        { title: "Planning", url: "/corrective/planning" },
+        { title: "Alerte", url: "/corrective/alerte" },
       ],
     },
     {
@@ -111,25 +96,15 @@ const data = {
       ],
     },
   ],
-  // projects: [
-  //   { name: "Design Engineering", url: "#", icon: Frame },
-  //   { name: "Sales & Marketing", url: "#", icon: PieChart },
-  //   { name: "Travel", url: "#", icon: Map },
-  // ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const { theme, setTheme } = useTheme();
+  const { activeMenu, setActiveMenu } = useMenu();
   const [mounted, setMounted] = React.useState(false);
-  const [activeMenu, setActiveMenu] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     setMounted(true);
-    // Optionnel: définir le menu actif par défaut si nécessaire
-    const defaultActive = data.navMain.find((item) => item.isActive);
-    if (defaultActive) {
-      setActiveMenu(defaultActive.title);
-    }
   }, []);
 
   const toggleTheme = () => {
@@ -137,12 +112,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   };
 
   const handleMenuToggle = (title: string) => {
-    setActiveMenu((prev) => (prev === title ? null : title));
+    setActiveMenu(activeMenu === title ? null : title);
   };
 
-  if (!mounted) {
-    return null;
-  }
+  if (!mounted) return null;
 
   return (
     <Sidebar collapsible="icon" {...props}>

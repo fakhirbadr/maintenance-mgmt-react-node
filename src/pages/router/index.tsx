@@ -6,6 +6,11 @@ import AboutPage from "../private/about";
 import Planning from "../private/preventive/planning";
 import Alerte from "../private/preventive/alerte";
 import Dashboard from "../private/preventive/dashboard";
+import Historique from "../private/preventive/historique";
+import DashboardCorrective from "../private/corrective/dashboard/dashboard";
+import CrationCorrective from "../private/corrective/creation/index";
+import PlanningCorrective from "../private/corrective/planning/index";
+import AlerteCorrective from "../private/corrective/alerte/index";
 
 const GlobalLayout = lazy(() => import("../layout"));
 const LoginPage = lazy(() => import("../public/login"));
@@ -30,6 +35,21 @@ export default function Router() {
               <Route path="/preventive/creation" element={<Creation />} />
               <Route path="/preventive/planning" element={<Planning />} />
               <Route path="/preventive/alerte" element={<Alerte />} />
+              <Route path="/preventive/historique" element={<Historique />} />
+
+              <Route
+                path="/corrective/dashboard"
+                element={<DashboardCorrective />}
+              />
+              <Route
+                path="/corrective/creation"
+                element={<CrationCorrective />}
+              />
+              <Route
+                path="/corrective/planning"
+                element={<PlanningCorrective />}
+              />
+              <Route path="/corrective/alerte" element={<AlerteCorrective />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
 

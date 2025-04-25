@@ -4,7 +4,7 @@ import MaintenancePreventiveChart from "./MaintenancePreventiveChart";
 import EtatEquipment from "./EtatEquipment";
 import DelayedPrentiveByTechnicienChart from "./DelayedPrentiveByTechnicienChart";
 import StatsCard from "./Card";
-import { ListCheck, Hourglass } from "lucide-react";
+import { ListCheck, Hourglass, DollarSign, ChartLine } from "lucide-react";
 
 const Index = () => {
   return (
@@ -17,13 +17,13 @@ const Index = () => {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <StatsCard
             title="Revenue"
-            value="44 5231 MAD"
-            icon={ListCheck}
+            value="73 523  MAD"
+            icon={DollarSign}
             iconBgColor="bg-blue-500"
           />
           <StatsCard
             title="Maintenance preventive réalisées"
-            value="+2350"
+            value="+1700"
             icon={ListCheck}
             iconBgColor="bg-emerald-500"
           />
@@ -36,7 +36,7 @@ const Index = () => {
           <StatsCard
             title="Performance"
             value="66.5%"
-            icon={ListCheck}
+            icon={ChartLine}
             iconBgColor="bg-amber-500"
           />
         </div>

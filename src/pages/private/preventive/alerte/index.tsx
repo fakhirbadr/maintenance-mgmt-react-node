@@ -23,6 +23,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 type MaintenanceAlert = {
   id: string;
   titre: string;
+  Technicien: string;
   date: string;
   datePrevue: string;
   priorite: "haute" | "moyenne" | "basse";
@@ -35,6 +36,8 @@ const Index = () => {
     {
       id: "1",
       titre: "Maintenance des climatiseurs",
+      Technicien: "Fakhir Badr",
+
       date: "2024-05-10",
       datePrevue: "2024-05-15",
       priorite: "haute",
@@ -45,6 +48,8 @@ const Index = () => {
     {
       id: "2",
       titre: "Vérification des extincteurs",
+      Technicien: "Fakhir Badr",
+
       date: "2024-05-12",
       datePrevue: "2024-05-18",
       priorite: "moyenne",
@@ -54,6 +59,8 @@ const Index = () => {
     {
       id: "3",
       titre: "Maintenance ascenseur",
+      Technicien: "Fakhir Badr",
+
       date: "2024-05-05",
       datePrevue: "2024-05-08",
       priorite: "haute",
@@ -63,6 +70,8 @@ const Index = () => {
     {
       id: "4",
       titre: "Nettoyage réservoir d'eau",
+      Technicien: "Fakhir Badr",
+
       date: "2024-05-20",
       datePrevue: "2024-05-22",
       priorite: "basse",
@@ -189,6 +198,8 @@ const Index = () => {
               <TableHeader>
                 <TableRow>
                   <TableHead>Titre</TableHead>
+                  <TableHead>Technicien</TableHead>
+
                   <TableHead>Site</TableHead>
                   <TableHead>Date prévue</TableHead>
                   <TableHead>Retard</TableHead>
@@ -204,6 +215,7 @@ const Index = () => {
                       <TableCell className="font-medium">
                         {alerte.titre}
                       </TableCell>
+                      <TableCell>{alerte.Technicien}</TableCell>
                       <TableCell>{alerte.site}</TableCell>
                       <TableCell>{formatDate(alerte.datePrevue)}</TableCell>
                       <TableCell className="font-bold text-slate-700">

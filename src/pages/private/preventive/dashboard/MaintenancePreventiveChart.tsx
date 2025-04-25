@@ -183,6 +183,10 @@ const siteData = {
     { site: "Site Moh A", maintenance: 25 },
     { site: "Site Moh B", maintenance: 30 },
     { site: "Site Moh C", maintenance: 25 },
+    { site: "Site Moh A", maintenance: 25 },
+    { site: "Site Moh B", maintenance: 30 },
+    { site: "Site Moh C", maintenance: 25 },
+    { site: "Site Moh A", maintenance: 25 },
   ],
   Settat: [
     { site: "Site Settat A", maintenance: 25 },

@@ -1,9 +1,13 @@
 "use client";
 
 import React from "react";
-import { DataTableDemo } from "./dataTableDemo"; // ajuste le chemin si besoin
+import { useMediaQuery } from "react-responsive";
+import { DataTableDemo } from "./dataTableDemo";
+import DataTableCard from "./dataTableCard";
 
 const Index = () => {
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+
   return (
     <main className="flex flex-col px-5">
       <div className="flex">
@@ -11,7 +15,7 @@ const Index = () => {
       </div>
       <div className="flex flex-grow items-center justify-center overflow-x-hidden p-4">
         <div className="w-full">
-          <DataTableDemo />
+          {isMobile ? <DataTableCard /> : <DataTableDemo />}
         </div>
       </div>
     </main>
